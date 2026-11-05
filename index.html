@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAO STORE | Cửa hàng trực tuyến</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="logo" href="#">BAO<span>STORE</span></a>
+  <nav>
+    <a href="#home">Trang chủ</a><a href="#products">Sản phẩm</a>
+    <a href="#orders" id="ordersNav">Đơn hàng</a>
+  </nav>
+  <div class="header-actions">
+    <button class="icon-btn" id="accountBtn">👤 <span id="accountLabel">Đăng nhập</span></button>
+    <button class="icon-btn" id="wishlistBtn">♡ Yêu thích</button>
+    <button class="cart-btn" id="cartBtn">🛒 Giỏ hàng <b id="cartCount">0</b></button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-copy">
+    <p class="eyebrow">MUA SẮM DỄ DÀNG · PHONG CÁCH MỖI NGÀY</p>
+    <h1>Tìm món đồ<br><span>bạn yêu thích.</span></h1>
+    <p>Khám phá sản phẩm chất lượng với mức giá hợp lý tại BAO STORE.</p>
+    <a class="primary-btn" href="#products">Khám phá ngay →</a>
+  </div>
+  <div class="hero-art"><div class="art-circle">BAO<br>STORE</div><div class="art-tag">NEW<br>COLLECTION</div></div>
+</section>
+
+<section class="benefits">
+  <div>🚚 <b>Giao hàng toàn quốc</b><small>Nhận hàng tận nơi</small></div>
+  <div>🔒 <b>Thanh toán an toàn</b><small>Thông tin được bảo vệ</small></div>
+  <div>↩️ <b>Đổi trả dễ dàng</b><small>Hỗ trợ khách hàng</small></div>
+  <div>💬 <b>Hỗ trợ tận tâm</b><small>Luôn sẵn sàng tư vấn</small></div>
+</section>
+
+<section class="section" id="products">
+  <div class="section-heading"><div><p class="eyebrow">BỘ SƯU TẬP</p><h2>Sản phẩm nổi bật</h2></div><span id="resultCount"></span></div>
+  <div class="toolbar">
+    <input id="searchInput" type="search" placeholder="Tìm kiếm sản phẩm...">
+    <select id="categoryFilter"><option value="all">Tất cả danh mục</option><option>Thời trang</option><option>Điện tử</option><option>Phụ kiện</option><option>Gia dụng</option></select>
+    <select id="sortFilter"><option value="default">Sắp xếp mặc định</option><option value="low">Giá thấp đến cao</option><option value="high">Giá cao đến thấp</option></select>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<section class="section orders-section" id="orders">
+  <div class="section-heading"><div><p class="eyebrow">THEO DÕI MUA SẮM</p><h2>Đơn hàng của tôi</h2></div></div>
+  <div id="ordersList" class="orders-list"><p class="empty">Bạn chưa có đơn hàng nào.</p></div>
+</section>
+</main>
+
+<footer><a class="logo" href="#">BAO<span>STORE</span></a><p>© 2026 BAO STORE. Cửa hàng trực tuyến demo.</p><p>Hotline: 0900 000 000 · Email: support@baostore.example</p></footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="cartDrawer">
+  <div class="drawer-head"><h2>Giỏ hàng</h2><button class="close" data-close>×</button></div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-summary"><div><span>Tạm tính</span><b id="subtotal">0₫</b></div><div><span>Phí vận chuyển</span><b>Miễn phí</b></div><div class="total"><span>Tổng cộng</span><b id="total">0₫</b></div><button class="primary-btn full" id="checkoutBtn">Tiến hành đặt hàng</button></div>
+</aside>
+
+<div class="modal" id="authModal">
+  <button class="close modal-close" data-close>×</button>
+  <div class="tabs"><button class="tab active" data-tab="login">Đăng nhập</button><button class="tab" data-tab="register">Đăng ký</button></div>
+  <form id="authForm">
+    <h2 id="authTitle">Chào mừng trở lại!</h2>
+    <label id="nameWrap" class="hidden">Họ và tên<input id="authName" autocomplete="name"></label>
+    <label>Email<input id="authEmail" type="email" required autocomplete="email" placeholder="ban@email.com"></label>
+    <label>Mật khẩu<input id="authPassword" type="password" required minlength="6" autocomplete="current-password" placeholder="Ít nhất 6 ký tự"></label>
+    <button class="primary-btn full" id="authSubmit">Đăng nhập</button>
+    <p class="form-note" id="authMessage"></p>
+  </form>
+</div>
+
+<div class="modal wide" id="checkoutModal">
+  <button class="close modal-close" data-close>×</button>
+  <h2>Thông tin đặt hàng</h2>
+  <form id="checkoutForm">
+    <label>Họ và tên<input id="shipName" required></label>
+    <label>Số điện thoại<input id="shipPhone" required inputmode="tel" pattern="[0-9+ ]{9,15}"></label>
+    <label>Địa chỉ nhận hàng<textarea id="shipAddress" required rows="2"></textarea></label>
+    <label>Phương thức thanh toán<select id="payment"><option>Thanh toán khi nhận hàng (COD)</option><option>Chuyển khoản (mô phỏng)</option></select></label>
+    <div class="checkout-total">Tổng thanh toán: <b id="checkoutTotal">0₫</b></div>
+    <button class="primary-btn full">Xác nhận đặt hàng</button>
+    <p class="form-note">Đây là bản demo: không thu tiền và không kết nối ngân hàng.</p>
+  </form>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
